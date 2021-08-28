@@ -7,18 +7,26 @@ https://user-images.githubusercontent.com/69693621/131207157-e017fc2d-631a-4df5-
 
 ---
 ## Steps 
-1. Put the below mentioned property in the application.properties file
+1. Put the below dependency in pom.xml
+```
+<dependency>
+	<groupId>org.springdoc</groupId>
+	<artifactId>springdoc-openapi-ui</artifactId>
+	<version>1.5.10</version>
+</dependency>
+```
+2. Put the below mentioned property in the application.properties file
 ```
 springdoc.api-docs.groups.enabled=true
 ```
-2. Divide the controller endpoint(s) of each group in a distinct base package
+3. Divide the controller endpoint(s) of each group in a distinct base package
 ```
 - com.behl.controller.nsfw
   - put endpoint(s) that belong in 'nsfw' group here
 - com.behl.controller.sfw
   - put endpoint(s) that belong in 'sfw' group here
 ```
-3. Define Bean of type GroupedOpenApi for each group and specify the package to scan 
+4. Define Bean of type GroupedOpenApi for each group and specify the package to scan 
 ```
 @Bean
 public GroupedOpenApi nsfwOpenApi() {
@@ -27,7 +35,7 @@ public GroupedOpenApi nsfwOpenApi() {
 			.packagesToScan(packagesToscan).build();
 }
 ```
-4. (Optional) To customize the Open-API defintion including info, contact, security etc implement OpenApiCustomiser interface and override customize() containing your custom configurations
+5. (Optional) To customize the Open-API defintion including info, contact, security etc implement OpenApiCustomiser interface and override customize() containing your custom configurations
 ```
 @Configuration
 public class NsfwOpenApiCustomizer implements OpenApiCustomiser {
@@ -53,7 +61,7 @@ public GroupedOpenApi sfwOpenApi() {
 			.packagesToScan(packagesToscan).build();
 }
 ```
-5. Access the swagger-ui at the below URI containing multiple configured definition/groups
+6. Access the swagger-ui at the below URI containing multiple configured definition/groups
 ```
 http://server:port/swagger-ui.html
 ```
