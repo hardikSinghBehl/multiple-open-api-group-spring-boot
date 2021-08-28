@@ -25,7 +25,7 @@ public class NotSafeForWorkJokeController {
 	@ResponseStatus(value = HttpStatus.OK)
 	@Operation(summary = "Returns NSFW Joke")
 	public ResponseEntity<?> jokeRetreivalHandler() {
-		return ResponseEntity.ok(jokeService.get(Joke.NSFW));
+		return ResponseEntity.ok(jokeService.get(Joke.NSFW).toString());
 	}
 
 }
